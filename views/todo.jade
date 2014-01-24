@@ -1,0 +1,10 @@
+h1 new todo list
+form(action="/todo", method="post")
+  p
+    label Enter a new todo item
+    input(type='text',placeholder='new todo',name='todo-text')
+  p
+    input(type='submit', value='Save')
+ul
+  each todo in todos
+    li #{todo.txt}
