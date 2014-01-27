@@ -1,3 +1,4 @@
+var util = require('../app_modules/util.js');
 
 /*
  * GET home page.
@@ -83,3 +84,11 @@ exports.saveTodo = function(client) {
     res.redirect("back");
   }
 }
+
+exports.chat = function(req, res) {  
+  if (typeof req.cookies.JSESSIONID == 'undefined') {
+    res.cookie('JSESSIONID', util.createGuid());
+  }
+
+  res.render('chat');
+};

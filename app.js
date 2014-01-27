@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -51,6 +50,18 @@ app.post('/adduser', routes.adduser(db));
 app.get('/todo', routes.todo(redisClient));
 app.post('/todo', routes.saveTodo(redisClient));
 
-http.createServer(app).listen(app.get('port'), function(){
+app.get('/chat', routes.chat);
+
+var myApp = http.createServer(app);
+var io = require('socket.io').listen(myApp);
+
+myApp.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+io.sockets.on('connection', function (socket) {
+    socket.emit('message', { message: 'welcome to the chat' });
+    socket.on('send', function (data) {
+        io.sockets.emit('message', data);
+    });
 });
