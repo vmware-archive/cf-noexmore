@@ -1,3 +1,5 @@
+# cf-noexmore is no longer actively maintained by VMware.
+
 cf-noexmore
 ===========
 
